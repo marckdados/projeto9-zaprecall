@@ -29,22 +29,28 @@ export default function Footer({
     <Box>
       <div>
         <Button
+          data-identifier="flashcard-answer"
           cor="#FF3030"
           onClick={() => sendAnswer(currentOpen, "notRemembered")}
         >
           Não lembrei
         </Button>
         <Button
+          data-identifier="almost-forgot-btn"
           cor="#FF922E"
           onClick={() => sendAnswer(currentOpen, "almostRemembered")}
         >
           Quase não lembrei
         </Button>
-        <Button cor="#2FBE34" onClick={() => sendAnswer(currentOpen, "zap")}>
+        <Button
+          data-identifier="zap-btn"
+          cor="#2FBE34"
+          onClick={() => sendAnswer(currentOpen, "zap")}
+        >
           Zap !
         </Button>
       </div>
-      <span>
+      <span data-identifier="flashcard-counter">
         {counter}/{arrayQuestions.length} Concluidos
       </span>
     </Box>

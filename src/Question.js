@@ -124,11 +124,18 @@ function QuestionOpened({
 
   return (
     <QuestionOpen>
-      <p>{value}</p>
       {isShowButton ? (
-        <img src={setaVirar} alt="Virar Card" onClick={showAnswer} />
+        <>
+          <p data-identifier="flashcard-question">{value}</p>
+          <img
+            src={setaVirar}
+            alt="Virar Card"
+            onClick={showAnswer}
+            data-identifier="flashcard-turn-btn"
+          />
+        </>
       ) : (
-        ""
+        <p data-identifier="flashcard-answer">{value}</p>
       )}
     </QuestionOpen>
   );
@@ -137,8 +144,13 @@ function QuestionOpened({
 function QuestionClosed({ index, openCard, botao, cor, linha }) {
   return (
     <QuestionCloser cor={cor} linha={linha} data-identifier="flashcard">
-      <p>Pergunta {index + 1}</p>
-      <img src={botao} alt="Botão" onClick={openCard} />
+      <p data-identifier="flashcard-index-item">Pergunta {index + 1}</p>
+      <img
+        src={botao}
+        alt="Botão"
+        onClick={openCard}
+        data-identifier="flashcard-show-btn flashcard-status"
+      />
     </QuestionCloser>
   );
 }

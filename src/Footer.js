@@ -1,13 +1,52 @@
+import { useState } from "react";
+import questionUpdate from "./questionUpdate";
 import styled from "styled-components";
-export default function Footer() {
+const listAnswered = [];
+export default function Footer({
+  currentOpen,
+  arrayQuestions,
+  setArrayQuestions,
+}) {
+  const [counter, setCounter] = useState(0);
+
+  function sendAnswer(currentOpen, answerValue) {
+    if (currentOpen === null) return;
+    if (arrayQuestions[currentOpen].status === "showAnswer") {
+      questionUpdate(
+        arrayQuestions,
+        setArrayQuestions,
+        "answerd",
+        answerValue,
+        currentOpen
+      );
+      listAnswered.push(currentOpen);
+      setCounter(counter + 1);
+      console.log(currentOpen, listAnswered, answerValue);
+    }
+  }
+
   return (
     <Box>
       <div>
-        <Button cor="#FF3030">Não lembrei </Button>
-        <Button cor="#FF922E">Quase não lembrei </Button>
-        <Button cor="#2FBE34">Acertei</Button>
+        <Button
+          cor="#FF3030"
+          onClick={() => sendAnswer(currentOpen, "notRemembered")}
+        >
+          Não lembrei
+        </Button>
+        <Button
+          cor="#FF922E"
+          onClick={() => sendAnswer(currentOpen, "almostRemembered")}
+        >
+          Quase não lembrei
+        </Button>
+        <Button cor="#2FBE34" onClick={() => sendAnswer(currentOpen, "zap")}>
+          Zap !
+        </Button>
       </div>
-      <span>0/4 Concluidos</span>
+      <span>
+        {counter}/{arrayQuestions.length} Concluidos
+      </span>
     </Box>
   );
 }

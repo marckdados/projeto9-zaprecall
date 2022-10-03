@@ -1,9 +1,10 @@
+import { useState } from "react";
 import styled from "styled-components";
 import logo from "./assets/img/logo.png";
 import Footer from "./Footer";
 import Questions from "./Questions";
 
-const arrayQuestions = [
+const cards = [
   {
     question: "O que é JSX ? ",
     answer: "Uma extensão de linguagem do JavaScript.",
@@ -56,14 +57,26 @@ const arrayQuestions = [
 ];
 
 export default function Body() {
+  const [currentOpen, setCurrentOpen] = useState(null);
+  const [arrayQuestions, setArrayQuestions] = useState(cards);
+
   return (
     <Container>
       <Logo>
         <img src={logo} alt="Logo" />
         <h1>ZapRecall</h1>
       </Logo>
-      <Questions arrayQuestions={arrayQuestions} />
-      <Footer />
+      <Questions
+        arrayQuestions={arrayQuestions}
+        setArrayQuestions={setArrayQuestions}
+        currentOpen={currentOpen}
+        setCurrentOpen={setCurrentOpen}
+      />
+      <Footer
+        currentOpen={currentOpen}
+        arrayQuestions={arrayQuestions}
+        setArrayQuestions={setArrayQuestions}
+      />
     </Container>
   );
 }
